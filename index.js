@@ -1,22 +1,15 @@
-// const { log } = require("console");
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
-const { printTable } = require("console-table-printer");
-require("dotenv").config();
-
-// const db = require("./server");
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: 3306,
-});
+  host: 'localhost',
+  user: 'root',
+  database: 'employees_db'
+},);
 
-db.connect(() => {
-  mainSelection();
-});
+db.connect(function(err){
+ if (err) throw err
+})
 
 console.log("********************");
 console.log("*                  *");
@@ -81,7 +74,7 @@ function viewAllEmployee() {
   db.query(
     "SELECT employee.id, employee.first_name, employee.last_name, title, name AS department, salary, CONCAT( bosses.first_name, ' ',bosses.last_name) AS manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON department.id  = role.department_id LEFT JOIN employee AS bosses ON employee.manager_id = bosses.id",
     (err, data) => {
-      printTable(data);
+      console.table(data)
       mainSelection();
     }
   );
@@ -89,7 +82,7 @@ function viewAllEmployee() {
 
 function viewAllDepartment() {
   db.query("SELECT * FROM department", function (err, data) {
-    printTable(data);
+    console.table(data)
     mainSelection();
   });
 }
@@ -98,7 +91,7 @@ function viewAllRole() {
   db.query(
     "SELECT role.id, title, salary, name AS department FROM role LEFT JOIN department ON department.id = role.department_id",
     function (err, data) {
-      printTable(data);
+      console.table(data)
       mainSelection();
     }
   );
@@ -108,7 +101,7 @@ function viewEmployeeByDepartment() {
   db.query(
     "SELECT employee.first_name, employee.last_name, department.name AS department FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id",
     function (err, data) {
-      printTable(data);
+      console.table(data)
       mainSelection();
     }
   );
@@ -369,3 +362,5 @@ function quit() {
   console.log("Goodbye!");
   process.exit();
 }
+
+mainSelection()

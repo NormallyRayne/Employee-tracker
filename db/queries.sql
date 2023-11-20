@@ -12,4 +12,3 @@ from employee
 left join role on employee.role_id = role.id
 left join department on department.id = role.department_id
 left join employee as bosses on employee.manager_id=bosses.id;
-

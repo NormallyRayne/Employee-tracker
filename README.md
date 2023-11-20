@@ -6,6 +6,7 @@ The Employee Tracker is a command-line application designed to efficiently manag
 
 ## Video 
 
+https://youtu.be/znDzVgJ4u9w
 
 ## Table of Contents
 Features
@@ -43,14 +44,16 @@ Update an Employee Role:
 ## Getting Started
 
 ## Prerequisites
-Before running the Employee Tracker Project, ensure you have the following installed:
+Before running the Employee Tracker Project, mysql server running 
+```mysql -u root -p```
+```source db/schema.sql```
+```source db/seeds.sql```
 
-Node.js and npm (Node Package Manager)
-Database management system (e.g., MySQL, PostgreSQL)
+
 
 ## Usage
 
-Command line 
+Command line and ```node index.js```
 
 ## Technologies Used
 Node.js
@@ -59,4 +62,3 @@ JavaScript
 
 ## License
 This project is licensed under the MIT License.
-
